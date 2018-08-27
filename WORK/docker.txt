@@ -1,0 +1,33 @@
+Docker options
+--------------------------------------------------------------
+https://docs.docker.com/engine/reference/commandline/cli/
+https://docs.docker.com/engine/reference/commandline/run/#options
+--------------------------------------------------------------
+
+Artifactory
+===============================
+docker run -d --name local.art -p 8081:8081 4e9131c0ee88 -v "c:\DockerVolumes/Artifactory:/var/opt/jfrog/artifact"
+docker run -d --name local.art -p 8081:8081 4e9131c0ee88
+
+JIRA
+===============================
+docker run -d --name local.jira -p 8080:8080 cptactionhank/atlassian-jira:latest
+
+
+Docker
+-----------------------------------------------------
+docker commit <container_name> - save current state
+docker start <existing_container_name>
+docker stop  <existing_container_name>
+docker rm <existing_container_name>
+docker attach <existing_container_name> - attach to running container
+
+docker image ls - list 
+
+Ubuntu
+-----------------------------------------------------
+docker run -P -it ubuntu /bin/bash
+docker run -p 22:22 -it --name local.ssh ubuntu
+(-P means publish all oppened ports)
+
+
