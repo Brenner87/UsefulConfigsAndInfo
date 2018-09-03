@@ -1,9 +1,12 @@
- -----------------------------------
-| GIT workflow (simply)				| 
-| 1.	Make a change				|
-| 2.	Add the change				|
-| 3.	Make a commit to repo		|
- -----------------------------------
+ -----------------------------------------------------------------------
+| GIT workflow (simply)				|  fetch before you work    		|
+| 1.	Make a change				|  fetch before you push    		|
+| 2.	Add the change				|  fetch often              		|
+| 3.	Make a commit to repo		|  git pull = git getch + git merge |
+ -----------------------------------------------------------------------
+| https://help.github.com/												|
+ -----------------------------------------------------------------------
+
 git init							- initialize the git repository
 	e.g. git init; git add .; git commit -m "first commit"
 git add <file_name>					- add to staging
@@ -32,6 +35,9 @@ git branch alternate <id>
 		-d <branch_name>			- delete the branch (safety)
 		-D <branch_name>			- delete the branch (force)
 		-a							- show all branches even they were not downloaded (only info)
+		-r							- show remote branches
+git branch --merged					- lists branches merged into HEAD (current branch)
+git branch --merged master			- lists branches merged into master
 ------------
 git merge <branch_name>				- merge current branch with the mentioned
 ------------
@@ -48,6 +54,15 @@ git config user.name				- check config user name
 git config user.email				- check config user email
 git config credential.helper 'store'- save credentials to the file ~/.git-credentials (unsecure)	
 git config --global credential.helper 'cache --timeout=3600'	- remember credetials for 1h
+git config --global alias.st "status"			- setup alias for GIT
+git config --global alias.co "checkout"			- setup alias for GIT
+git config --global alias.ci "commit"			- setup alias for GIT
+git config --global alias.br branch				- setup alias for GIT
+git config --global alias.df diff				- setup alias for GIT
+git config --global alias.dfs "diff --staged"	- setup alias for GIT
+git config --global alias.logg "log --graph --decorate --oneline --abbrev-commit --all"	- setup alias for GIT
+
+
 -------------
 git diff							- show the changes in all files between working dir and staging
 git diff <file>						- show the changes in certain file
@@ -103,6 +118,30 @@ git show HEAD^^						- show info about two commits ago
 -------------
 git merge seo_title					- merge seo_tile branch into current (master?)
 git merge --abort					- abort current merge which is in progress
+-------------
+git stash save "description"		- save changes temporary (save state without commit)
+git stash list						- show all items in the stash
+git stash show						- show short info about last stash
+git stash show stash@{0}			- show short info about certain stash
+git stash show -p stash@{0}			- show full info about certain stash
+git stash apply						- pull stash to the working dir
+git stash pop						- pull stash to the working dir and remove from stash
+git stash drop stash@{0}			- delete item from the stash
+git stash clear						- !delete all items from stash
+-------------
+git remote							- shows all remote repositories
+git remote -v						- with more information
+git remote add <alias> <url>		- set alias and link
+	saved data is in .git/config
+git remote rm origin				- removes information about remote
+-------------
+git push -u <alias> <branch>		- push repository branch to the <alias>
+	e.g. -u origin master
+		 -u							- for trecking branch
+git push origin :non_tracking		- ":" is mean to delete remote branch
+git push origin non_tracking:non_tracking	- push branch to remote branch
+git push origin --delete non_tracking		- delete remote branch
+-------------
 ----------------------------------------------------------------------------
 
 
@@ -111,40 +150,51 @@ rm -rf .git							- delete all information about versions
 https://github.com/github/gitignore
 
 My log
-==================================================================================================
+=======================================================================================
 git checkout -b py3_01				- create branch py3_01
 git push origin py3_01				- push to GitHub
 git add `git status | grep modified | sed 's/\(.*modified:\s*\)//'`
 	add only modified files to the staging
+
+Aliases
+=======================================================================================
 
 Old:
 PS1='\[\033]0;$TITLEPREFIX:$PWD\007\]\n\[\033[32m\]\u@\h \[\033[35m\]$MSYSTEM \[\033[33m\]\w\[\033[36m\]`__git_ps1`\[\033[0m\]\n$'
 
 New:
 export PS1=':> \[\033]0;$PWD `__git_ps1`\007\]\[\033[33m\]\w\[\033[36m\]`__git_ps1`\[\033[0m\]\n\033[38;5;10m\]$\033[0m\] '
+			
+			BASH hotkeys
+MOVE --------------------------------------------
+Alt  + B  – Go left one word
+Ctrl + B  – Go left one char
+Alt  + F  – Go right one word 
+Ctrl + F  – Go right one char
+Ctrl + A  – Go to start of the command line
+Ctrl + E  – Go to   end of the command line
+Ctrl + XX – Go to start and back of command line
+Alt  + T  – swap current word with previous
+Ctrl + T  – swap character with the previous one
+Ctrl + _  - undo last key press
+EDIT --------------------------------------------
+Ctrl + W  – Del to start of word
+Alt  + D  – Del to   end of word
+Ctrl + D  – Del character under 
+Ctrl + U  – Del to start of the command line
+Ctrl + K  – Del to   end of the command line
+Ctrl + H  – Del character before
+Ctrl + y  – paste that was cut by deletion
+HISTORY -----------------------------------------
+Ctrl + P  - Go to the previous command
+Ctrl + N  - Go to the next     command
+Alt  + R  - Revert changes to a command 
+Ctrl + R  - Recall the last command for char
+Ctrl + O  - Run a command you found with Ctrl + R
+Ctrl + G  - Leave history searching mode
+MODIFY ------------------------------------------
+Alt  + C  – capitalize to end of word
+Alt  + U  – uppercase to end of word
+Alt  + L  – lowercase to end of word
+-------------------------------------------------
 
--------------------------------------------------------------------------------------
-Ctrl + a – go to the start of the command line
-Ctrl + e – go to the end of the command line
-Alt + b – move backward one word (or go to start of word the cursor is currently on)
-Alt + f – move forward one word (or go to end of word the cursor is currently on)
--------------------------------------------------------------------------------------
-Ctrl + k – delete from cursor to the end of the command line
-Ctrl + u – delete from cursor to the start of the command line
--------------------------------------------------------------------------------------
-Ctrl + w – delete from cursor to start of word (i.e. delete backwards one word)
-Alt + d – delete to end of word starting at cursor (whole word if cursor is at the beginning of word)
--------------------------------------------------------------------------------------
-Ctrl + y – paste word or text that was cut using one of the deletion shortcuts (such as the one above) after the cursor
-Ctrl + xx – move between start of command line and current cursor position (and back again)
--------------------------------------------------------------------------------------
-Alt + c – capitalize to end of word starting at cursor (whole word if cursor is at the beginning of word)
-Alt + u – make uppercase from cursor to end of word
-Alt + l – make lowercase from cursor to end of word
-Alt + t – swap current word with previous
-Ctrl + f – move forward one character
-Ctrl + b – move backward one character
-Ctrl + d – delete character under the cursor
-Ctrl + h – delete character before the cursor
-Ctrl + t – swap character under cursor with the previous one
--------------------------------------------------------------------------------------
