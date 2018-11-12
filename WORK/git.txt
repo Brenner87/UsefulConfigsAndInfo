@@ -12,6 +12,8 @@ git init							- initialize the git repository
 git add <file_name>					- add to staging
 git add .							- add all files to the staging
 ------------
+git log 							- history of commits
+------------
 git commit -m "first commit"		- commit with comment
 git commit -am "first commit"		- add all and commit with comment
 git commit --amend -m <message>		- ammend message in the last commit
@@ -25,6 +27,9 @@ git checkout <branch_name>			- switch to the branch
 git checkout <branch_name>			- go to the latest commit in the branch
 		-b <branch_name>			- create new branch and switch to it
 	e.g. git checkout -b 02_01 origin/02_01
+------------
+git fetch <remote repo> <commit>	- get remote repo with specific commit
+git checkout <commit>				- checkout the commit (from previous command)
 ------------
 git status 							- get current status
 ------------
@@ -142,9 +147,12 @@ git push origin :non_tracking		- ":" is mean to delete remote branch
 git push origin non_tracking:non_tracking	- push branch to remote branch
 git push origin --delete non_tracking		- delete remote branch
 -------------
+git fetch https://code.ipreo.com/Ipreo/BuysideAutomation.git debfa9f72dc0f15a9eb5c52fbffa8a82c36700fa
+git checkout debfa9f72dc0f15a9eb5c52fbffa8a82c36700fa
 ----------------------------------------------------------------------------
 
-
+https://code.ipreo.com/Ipreo/BuysideAutomation.git
+e0e9459c716cf3958d2ed85b8ccfb941cbd1a8e5
 
 rm -rf .git							- delete all information about versions
 https://github.com/github/gitignore
@@ -196,5 +204,13 @@ MODIFY ------------------------------------------
 Alt  + C  – capitalize to end of word
 Alt  + U  – uppercase to end of word
 Alt  + L  – lowercase to end of word
--------------------------------------------------
 
+GIT ALIAS ---------------------------------------
+alias.st "status"			
+alias.co "checkout"			
+alias.ci "commit"			
+alias.br branch				
+alias.df diff				
+alias.dfs "diff --staged"	
+alias.logg "log --graph --decorate --oneline ...
+-------------------------------------------------
