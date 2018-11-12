@@ -1,0 +1,396 @@
+is used in Linux to run scripts from just command line
+#!/usr/bin/env python3
+
+Multiline string: 
+--- ✄ -------------------------
+x = '''
+
+text done GitHub  
+
+'''
+--- ✄ -------------------------
+Multiline comments (tripple doublequotes):
+"""
+any comments here
+"""
+--- ✄ -------------------------
+float problem; Don't use fload for money - use Decimal 
+--- ✄ -------------------------
+x = 0.1+0.1+0.1-0.3 #x:  5.551115123125783e-17
+--- ✄ -------------------------
+x = None, 0, '' == False
+if x:
+--- ✄ -------------------------
+check type:
+if isinstance(x, tuple):
+--- ✄ -------------------------
+Ternary conditional operator, conditional assignment:
+hungry = False
+x = 'Feed the bear now!' if hungry else 'Do not feed the bear.'
+--
+(if_test_is_false, if_test_is_true)[test]
+Example:
+fat = True
+fitness = ("skinny", "fat")[fat]
+print("Ali is ", fitness)
+# Output: Ali is fat
+--- ✄ -------------------------
+// - Ingeger Division
+% Remainder (Modulo)
+** Exponent
+--- ✄ -------------------------
+Bitwise Operators:
+& And
+| or
+^ Xor
+<< Shift left
+>> Shift right
+--- ✄ -------------------------
+Bin, oct, hex, dec operations:
+x = 0x0a
+y = 0x02
+z = x + y
+t = 0b00011
+s = x << 2 # 00010 -> 01000
+
+print(f'(hex) x is {x:02x}, y is {y:02x}, z is {z:02x}')
+print(f'(bin) x is {x:08b}, y is {y:08b}, z is {z:08b}')
+print(f'(dec) x is {x:05}, y is {y:05}, z is {z:05}')
+0x12 		- hex
+0b1110011 	- binary
+0o12		- oct
+print("The decimal value of",dec,"is:")
+print(bin(dec),"in binary.")
+print(oct(dec),"in octal.")
+print(hex(dec),"in hexadecimal.")
+--- ✄ -------------------------
+Boolean Operators
+and 	- And
+or 		- Or
+not 	- Not 
+in 		- Value in set
+not in 	- Value not in set
+is 		- Same object identity
+is not 	- Not same object identity
+--- ✄ -------------------------
+Loops:
+while
+for
+Controlling loops:
+break
+continue
+--- ✄ -------------------------
+functions:
+def kitten(a, b = 0)
+!Default values should be defined after undefault
+--- ✄ -------------------------
+Argument lists:
+def kitten(*args):
+in this case args is a tuple
+eg.
+    x = (3,45, ' asdf ')
+    kitten(*x)
+or
+	kitten(3,45, ' asdf ')
+--- ✄ -------------------------
+Keyword Argument lists:
+kitten(Buffy = 'meow', Zilla = 'grr', Angel = 'rawr')
+def kitten(**args):
+	if len(args):
+		for k in args:
+			print('Kitten {} says {}'.format(k, args[k]'))
+
+def main():
+    x = dict(Buffy='meow', Zilla='grr', Angel='rawr')
+    kitten(**x)
+--- ✄ -------------------------
+def inclusive_range(*args):
+    numargs = len(args)
+    start = 0
+    step = 1
+
+    if numargs < 1:
+        raise TypeError(f'expected at least 1 argument, got {numargs}')
+    elif numargs == 1:
+        stop = args[0]
+    elif numargs == 2:
+        (start, stop) = args
+    elif numargs == 3:
+        (start, stop, step) = args
+    else:
+        raise TypeError(f'Expected at most 3 arguments, got {numargs}')
+
+    i = start
+    while i <= stop:
+        yield i
+        i += step
+--- ✄ -------------------------
+Decorators
+import time
+
+
+def timer(f):
+    def tmp(*args, **kwargs):
+        t = time.time()
+        res = f(*args, **kwargs)
+        print("Function run time is: %f" % (time.time() - t))
+        return res
+    return tmp
+@timer
+def func(x, y):
+    print(x ** y)
+func(5, 500000)
+--- ✄ -------------------------
+# def tmp(*args, **kwargs) - arguments are used to include all possible variants of arguments
+--- ✄ -------------------------
+factorial
+def fact(x):
+    return x * fact(x - 1) if x > 0 else 1
+--- ✄ -------------------------
+get len of int
+1. return len(str(x))
+2. return int(math.log10(x)) + 1
+--- ✄ -------------------------
+SETs (is not tuple) - all unique! items, not sorted, is created by function set() or curly braces
+a = set("321456")
+b = set("567890")
+c = {8,a,t}
+print(sorted(a))
+    {123456}
+print(sorted(a - b)) - all in a but not in b
+    {1234}
+print(sorted(a | b)) - all in both a and b
+    {0123456789}
+print(sorted(a ^ b)) - a or b but not both
+    {01234789}
+print(sorted(a ^ b)) - member in both
+    {56}
+--- ✄ -------------------------
+#List comprehension, multiply every value in list by 2
+seq = range(11)
+seq2 = [x*2 for x in seq]
+seq2 = [x for x in seq if x % 3 != 0]
+seq2 = [(x, x ** 2) for x in seq]
+seq2 = {x: x ** 2 for x in seq} - create a dict from list
+--- ✄ -------------------------
+Class
+class Animal:
+    def __init__(self, **kwargs): #constructor
+        self._type = kwargs['type'] if 'type' in kwargs else 'kitten'
+        self._name = kwargs['name'] if 'name' in kwargs else 'fluffy'
+        self._sound = kwargs['sound'] if 'sound' in kwargs else 'rawr'
+    def type(self):
+        return self._type
+    def name(self):
+        return self._name
+    def sound(self):
+        return self._sound
+def print_animal(o):
+    if not isinstance(o, Animal):
+        raise TypeError('print_animal(): required an Animal')
+    print('The {} is named "{}" and says "{}".'.format(o._type, o.name(), o.sound()))
+def main():
+    a0 = Animal(type='kitten', name='fluffy', sound='rwar')
+    a1 = Animal(type='duck', name='Donald', sound='quack')
+    print_animal(a0)
+    print_animal(a1)
+    print_animal(Animal())
+if __name__ == '__main__':
+    main()  
+--- ✄ -------------------------
+class Animal:
+    def __init__(self, **kwargs):
+        self._type = kwargs['type'] if 'type' in kwargs else 'kitten'
+        self._name = kwargs['name'] if 'name' in kwargs else 'fluffy'
+        self._sound = kwargs['sound'] if 'sound' in kwargs else 'rawr'
+    def type(self, t=None): # setter and getter in one
+        if t: self._type = t
+        return self._type
+    def name(self, n=None):
+        if n: self._name = n
+        return self._name
+    def sound(self, s=None):
+        if s: self._sound = s
+        return self._sound
+    def __str__(self): #special methon to provide string representation of the object 
+        return f'The {self.type()} is named "{self.name()}" and says "{self.sound()}"."' #"
+def print_animal(o):
+    if not isinstance(o, Animal):
+        raise TypeError('print_animal(): required an Animal')
+    print('The {} is named "{}" and says "{}".'.format(o._type, o.name(), o.sound()))
+def main():
+    a0 = Animal(type='kitten', name='fluffy', sound='rwar')
+    a1 = Animal(type='duck', name='Donald', sound='quack')
+    a0.sound('bark')
+    print_animal(a0)
+    print_animal(a1)
+    print_animal(Animal())  
+--- ✄ -------------------------
+Class variable:
+class Animal:
+    x = [1, 2, 3] #class variable, can be chaned by any object of this class and is shared among all objects
+...
+a1.x[0] = 7
+    Animal.x[0]=12
+    print(a0.x)
+--- ✄ -------------------------
+private incapsulation, Python doesn't have private
+but has convention that if method or variable has "_" in the name - don't touch.
+--- ✄ -------------------------
+Class inheritance
+# Supper always calls the parrent class
+class Animal:
+    def __init__(self, **kwargs):
+        if 'type' in kwargs: self._type = kwargs['type']
+        if 'name' in kwargs: self._name = kwargs['name']
+        if 'sound' in kwargs: self._sound = kwargs['sound']
+    def type(self, t=None):
+        if t: self._type = t
+        try:
+            return self._type
+        except AttributeError:
+            return None
+    def name(self, n=None):
+        if n: self._name = n
+        try:
+            return self._name
+        except AttributeError:
+            return None
+    def sound(self, s=None):
+        if s: self._sound = s
+        try:
+            return self._sound
+        except AttributeError:
+            return None
+    def __str__(self):
+        return f'The {self.type()} is named "{self.name()}" and says "{self.sound()}"."' #"
+class Duck(Animal):
+    def __init__(self, **kwargs):
+        self._type = 'duck'
+        if 'type' in kwargs: del kwargs['type']
+        super().__init__(**kwargs)
+class Kitten(Animal):
+    def __init__(self, **kwargs):
+        self._type = 'kitten'
+        if 'type' in kwargs: del kwargs['type']
+        super().__init__(**kwargs)
+def main():
+    a0 = Kitten(name='fluffy', sound='rwar')
+    a1 = Duck(name='Donald', sound='quack')
+    print(a0)
+    print(a1)
+--- ✄ -------------------------
+Revert string:
+class revStr(str):
+    def __str__(self):
+        return self[::-1]
+def main():
+    hello = revStr('Hello, World.')
+    print(hello)
+    print(type(hello))
+--- ✄ -------------------------
+Iterator objects:
+Inclusive range:
+class inclusive_range:
+    def __init__(self, *args):
+        numargs = len(args)
+        self._start = 0
+        self._step = 1
+
+        if numargs < 1:
+            raise TypeError(f'expected at least 1 argument, got {numargs}')
+        elif numargs == 1:
+            self._stop = args[0]
+        elif numargs == 2:
+            (self._start, self._stop) = args
+        elif numargs == 3:
+            (self._start, self._stop, self._step) = args
+        else:
+            raise TypeError(f'expected at most 3 arguments, got {numargs}')
+
+        self._next = self._start
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self._next > self._stop:
+            raise StopIteration
+        else:
+            _r = self._next
+            self._next += self._step
+            return _r
+
+def main():
+    for n in inclusive_range(25):
+        print(n, end=' ')
+    print()
+--- ✄ -------------------------
+Exceptions
+try:
+    x = int('asdf')
+except ValueError:
+    print('I caught a ValueError')   
+--- ✄ -------------------------
+try:
+    x = 5/0
+except ValueError:
+    print('I caught a ValueError')
+except ZeroDivisionError:
+    print('Don\'t divide by zero') 
+--- ✄ -------------------------
+def main():
+    try:
+        x = 5 / 0
+    except ValueError:
+        print('I caught a ValueError')
+    # except ZeroDivisionError:
+    #     print('Don\'t divide by zero')
+    except:
+        print('unknown error')
+    else:
+        print('good job!')
+        print(x)        
+--- ✄ -------------------------
+import sys
+def main():
+    try:
+        x = 5 / 0
+    except ValueError:
+        print('I caught a ValueError')
+    # except ZeroDivisionError:
+    #     print('Don\'t divide by zero') \'
+    except:
+        print(f'unknown error: {sys.exc_info()[1]}')
+    else:
+        print('good job!')
+        print(x)
+--- ✄ -------------------------
+String
+print('Hello, World. {}'.format(42*7))
+print("""
+        Hello,
+        world
+        {}
+        {}
+        {}
+""".format(4, 12, "asdf"))
+--- ✄ -------------------------'
+String concatenation:
+'asdf ' + ' asdf'
+' asdf asdf'  'adsf asd f'
+--- ✄ -------------------------
+formatting string:
+x = 42
+print('the number is {}'.format(x))
+--
+x = 42
+y = 55
+print('the number is {xx}/{bb}'.format(bb=x, xx=y))
+--
+print('first value "{1}", second value "{0}"'.format(12, 75))
+--
+--- ✄ -------------------------
+7z 7zip python libarchive tar zip gz bzip2:
+pip install libarchive
+--- ✄ -------------------------
