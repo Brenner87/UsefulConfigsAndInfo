@@ -1,0 +1,29 @@
+#path_to_7z: C:\Program Files\7-Zip\
+
+# is used only in case of using 7z compression type
+psw_file: 'psw.txt'
+backup_destination: C:\Users\Vitaliy_Osidach\Desktop\temp
+
+type: zip #zip or 7z, 7z is not realized yet
+use_psw: true
+keep_versions: 7
+#backup_destination: C:\Users\Vitaliy_Osidach\OneDrive - EPAM\backup\
+
+
+dir_paths:
+  - C:\Users\Vitaliy_Osidach\Documents\Interviews
+  - C:\Users\Vitaliy_Osidach\Documents\Ozi_Documents
+  - c:\Releases\SSL_update\
+  - C:\Users\Vitaliy_Osidach\keys
+#  - C:\GIT\UsefulConfigsAndInfo
+  - C:\GIT\github-administration
+  - onenote
+
+file_paths:
+  - C:\Users\Vitaliy_Osidach\Documents\SuperKB.xlsx
+  - C:\Users\Vitaliy_Osidach\.npmrc
+  - C:\Users\Vitaliy_Osidach\Documents\default1.rdg
+  - C:\Users\Vitaliy_Osidach\.minttyrc
+  - C:\Users\Vitaliy_Osidach\.bash_profile
+  - C:\Users\Vitaliy_Osidach\AppData\Roaming\NuGet\NuGet.Config1
+
